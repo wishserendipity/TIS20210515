@@ -242,4 +242,56 @@
             </pre>
         </div>
     </body>
+    <script>
+    // 객체 리터럴( {} )을 이용하여 객체 생성합니다.
+    var foo = {
+            name  : 'foo',
+            age   : 30,
+            array : [1,4,5,5],
+            run   : function () {
+                return this.name;
+            },
+        };
+
+        console.log(foo);
+        // 마침표(.) 표기법을 사용하여 foo 객체의 name 값을 console.log()로 출력하시오
+        console.log(foo.name, foo.age);
+
+        //RCUD : R. 읽기- 대괄호 표기법
+        //대괄호( [] )표기법을 사용하여 foo 객체의 age 값을 console.log()로 출력하시오
+        console.log(foo['name'], foo['age']);
+
+       // foo 객체에 키명이 gender 인 프로퍼티를 추가하고 gender 값에 "man" 을 설정하시오
+       // foo 객체의 gender 값을 console.log()로 출력하시오
+       //foo.gender = "man";
+       //console.log(foo.name, foo.age, foo.gender);
+
+       foo['gender'] = "man";
+       //console.log(foo['name'], foo['age'], foo['gender']);
+       console.log(foo);
+
+       foo['name'] = "bar";
+       console.log(foo);
+
+       var dog = {
+           name : "Fido",
+           weight:40,
+           breed : "Mixed",
+           loves : ["walks" , "fetching balls"],
+           run   : function () {
+               console.log("***", this.name);
+                return this.name;
+            },
+       };
+       console.log(dog);
+
+       var table ={
+            name : "Nature of Code",
+            price : 30000,
+            author : "다니엘",
+            ISBN : "9788968481901",
+            page : "620페이지"
+       };
+       console.log(table);
+    </script>
 </html>
