@@ -87,13 +87,13 @@
     <h2>v-if/v-else-if/v-else 연습 4 : 실습</h2>
     <div id="app5">
         <button v-on:click="clickBind">클릭</button>
-        <span v-if="type === 1">
+        <span v-if="type2 === 1">
             A
         </span>
-        <span v-else-if="type === 2">
+        <span v-else-if="type2 === 2">
             B
         </span>
-        <span v-else-if="type === 3">
+        <span v-else-if="type2 === 3">
             C
         </span>
         <span v-else>
@@ -105,3 +105,144 @@
 </html>
 
 <!-- vue 플러그인 임포트   -->
+
+<!-- vue 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">/* vue 플러그인 임포트 */</script>
+<script>
+
+    new Vue({
+        /* edtmc^2w */
+        el: "#app1",
+        data: {
+            awesome : true
+        },
+        //template: ``,
+        methods: {
+
+        },
+        components: {
+            /* 지역 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
+
+        },
+        computed: {
+
+        },
+        watch: {
+
+        },
+        mounted: function() {
+            console.log("mounted");
+        },
+        updated: function() {
+            console.log("updated");
+        },
+    });
+
+new Vue({
+    /* edtmc^2w */
+    el: "#app2",
+    data: {
+        awesome : false,
+    },
+    //template: ``,
+    methods: {
+
+    },
+    components: {
+        /* 지역 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
+
+    },
+    computed: {
+
+    },
+    watch: {
+
+    },
+    mounted: function() {
+        console.log("mounted");
+    },
+    updated: function() {
+        console.log("updated");
+    },
+});
+
+new Vue({
+    /* edtmc^2w */
+    el: "#app3",
+    data: {
+        awesome : true
+    },
+    //template: ``,
+    methods: {
+        clickBind : function(event){
+            console.log(event.target)
+            console.log(this.$data.awesome);
+            /*if(this.$data.awesome===true){
+                this.$data.awesome = false;
+            }else{
+                this.$data.awesome = true;
+            }*/
+            // 위에 코드를 한줄 로 변경
+            this.$data.awesome = !this.$data.awesome;
+            this.$set(this.$data, "awesome", !this.$data.awesome);
+        }
+    },
+    components: {
+        /* 지역 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
+
+    },
+    computed: {
+
+    },
+    watch: {
+
+    },
+    mounted: function() {
+        console.log("mounted");
+    },
+    updated: function() {
+        console.log("updated");
+    },
+});
+
+new Vue({
+    /* edtmc^2w */
+    el: "#app5",
+    data: {
+        type2: 0
+    },
+    //template: ``,
+    methods: {
+        clickBind : function(event){
+            console.log(this.$data.type2);
+           /* if(this.$data.type2===4){
+                this.$data.type2= "0";
+            }else{
+                this.$data.type2=     this.$data.type2+1;
+            }*/
+
+            // 방법2 한줄로 줄이기
+            this.$data.type2 = (++this.$data.type2) %4;
+            this.$set(this.$data, "type2", (++this.$data.type2) %4);
+        }
+    },
+    components: {
+        /* 지역 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
+
+    },
+    computed: {
+
+    },
+    watch: {
+
+    },
+    mounted: function() {
+        console.log("mounted");
+    },
+    updated: function() {
+        console.log("updated");
+    },
+});
+
+</script>
+

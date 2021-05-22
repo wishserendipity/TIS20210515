@@ -58,11 +58,100 @@
             사랑해~~~
         </div>
 
-        
+        <script type="text/x-template" id="template3">
+        <i>x-template을 이용한 데이터 출력. {{message3}} </i>
+    </script>
 
     </div>
 </body>
 
 </html>
 
+
 <!-- vue 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">/* vue 플러그인 임포트 */</script>
+
+<script>
+    new Vue({
+        /* edtmc^2w */
+        el: "#app1",
+        data: {
+            message  : '<i>콧수염 괄호를 이용한 데이터 출력</i>'
+        },
+        //template: ``,
+        methods: {
+
+        },
+        components: {
+            /* 지역 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
+
+        },
+        computed: {
+
+        },
+        watch: {
+
+        },
+        mounted: function() {
+            console.log("mounted");
+        },
+        updated: function() {
+            console.log("updated");
+        },
+    });
+
+    new Vue({
+        /* edtmc^2w */
+        el: "#app2",
+        data: {
+            message2  : '콧수염 괄호를 이용한 데이터 출력'
+        },
+        template: ` <i>template 속성을 이용한 데이터 출력. {{message2}} </i>`,
+        methods: {
+
+        },
+        components: {
+            /* 지역 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
+
+        },
+        computed: {
+
+        },
+        watch: {
+
+        },
+        mounted: function() {
+            console.log("mounted");
+        },
+        updated: function() {
+            console.log("updated");
+        },
+    });
+    new Vue({
+        /* edtmc^2w */
+        el: "#app3",
+        data: {
+            message3 :  '콧수염 괄호를 이용한 데이터 출력'
+        },
+        template: "#template3",
+        methods: {
+
+        },
+        components: {
+            /* 지역 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
+
+        },
+        computed: {
+
+        },
+        watch: {
+
+        },
+        mounted: function() {
+            console.log("mounted");
+        },
+        updated: function() {
+            console.log("updated");
+        },
+    });
+</script>

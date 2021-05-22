@@ -36,13 +36,63 @@
     <div id="app">
         {{ message }}
         <!-- 버튼 기능 추가-->
-
+        <button v-on:click="addMsg">추가</button>
+        <button v-on:click="addMsg2">추가2</button>
     </div>
 
-    
-    
+
+
 </body>
 
 </html>
 
+<!-- vue 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">/* vue 플러그인 임포트 */</script>
+<script>
+
+new Vue({
+    /* edtmc^2w */
+    el: "#app",
+    data: {
+        message : null,
+    },
+    //template: ``,
+    methods: {
+        addMsg : function(event){
+            //this.$data.message = "lmj";
+            console.log(event.target);
+            //this.$set(this.$data, "message" , "lmj");
+            this.$set(this.$data, "message" , "lmj" +new Date().toTimeString());
+        },
+        addMsg2 : function(event){
+            //this.$data.message = "lmj";
+            this.$set(this.$data, "message" , "ddkdkkddkdk");
+        }
+
+    },
+    components: {
+        /* 지역 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
+
+    },
+    computed: {
+
+    },
+    watch: {
+
+    },
+    created : function(){
+        console.log("created");
+        this.$set(this.$data, "message" , "created");
+    },
+    mounted: function() {
+        console.log("mounted");
+        this.$set(this.$data, "message" , "mounted");
+    },
+    updated: function() {
+        console.log("updated");
+
+    },
+});
+
+</script>
 <!-- vue 플러그인 임포트   -->

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -37,6 +37,11 @@
     <hr>
 
     <div id="app" class="col-md-10 offset-md-1">
+        <label for="">이름</label><input v-model:value="name">
+        <label for="">전화번호</label><input v-model:value="tel">
+        <label for="">주소</label><input v-model:value="address">
+        <button v-on:click="addBtn">추가</button>
+
         <table id="list" class="table-bordered">
             <thead>
                 <tr class="bg-warning text-white text-center">
@@ -55,13 +60,96 @@
                 </tr>
             </tbody>
         </table>
+
+
+        <li v-for="(mainitem, i) in mainitems " v-bind:key="i">
+            <a href="#">{{mainitem.text}}</a>
+            <!-- ul>
+                <li v-for="(subitem , j) in subitmes" v-bind:key="j"></li>
+                    <a href="#">{{subitems.text}}</a>
+            </!-->
+        </li>
+
     </div>
 
 
-    
+
 
 </body>
 
 </html>
 
 <!-- vue 플러그인 임포트   -->
+
+<!-- vue 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">/* vue 플러그인 임포트 */</script>
+<script>
+new Vue({
+    /* edtmc^2w */
+    el: "#app",
+    data: {
+        contacts : [
+                    { name: '설현', tel: '010-1111-1111' , address:'주소설현'},
+                    { name: '설리', tel: '010-2222-2222' , address:'주소설리'},
+                ],
+        name : '',
+        tel : '',
+        address : '',
+        mainitems : [
+             {text:'menu1'}
+           , {text:'menu2'}
+           , {text:'menu3'}],
+        /*subitems : [
+            menu1[{text:'menu1-1'}, {text:'menu1-2'}, {text:'menu1-3'}],
+            menu2{text:'menu2-1'}, {text:'menu2-2'}, {text:'menu2-3'}],
+            menu3{text:'menu3-1'}, {text:'menu3-2'}, {text:'menu3-3'}],
+
+        ]*/
+    },
+    //template: ``,
+    methods: {
+        addBtn : function(event) {
+            console.log(event.target.value);
+            console.log(this.$data.name);
+            console.log(this.$data.tel);
+            console.log(this.$data.address);
+            //debugger;
+            //console.log(this.$data.contacts.length);
+            //this.$data.contacts = [ { name: '하니', tel: '010-3-3333' , address:'주소방배'} ];
+            //this.$data.contacts.push({ name: '하니', tel: '010-3333-3333' , address:'주소방배'} );
+           // this.$data.contacts.push({ name: this.$data.name, tel: this.$data.tel , address:this.$data.address} );
+            var obj = {
+                name : this.$data.name,
+                tel : this.$data.tel,
+                address : this.$data.address
+            }
+            // push는 사용 하지 말것
+            //this.$data.contacts.push(obj);
+            // 최종본
+            //this.$data.contacts[ this.$data.contacts.length ] = obj;
+            this.$set(this.$data.contacts, this.$data.contacts.length , obj);
+
+            //console.log(this.$data.contacts);
+            //this.$set(this.$data, "contacts",  this.$data.contacts.push = ( '하니', '010-3-3333' ,'주소방배') );
+        }
+    },
+    components: {
+        /* 지역 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
+
+    },
+    computed: {
+
+    },
+    watch: {
+
+    },
+    mounted: function() {
+        console.log("mounted");
+    },
+    updated: function() {
+        console.log("updated");
+    },
+});
+
+
+</script>

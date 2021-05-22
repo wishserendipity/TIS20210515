@@ -111,3 +111,63 @@
 </html>
 
 <!-- vue 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">/* vue 플러그인 임포트 */</script>
+<script>
+    new Vue({
+        /* edtmc^2w */
+        el: "#app",
+        data: {
+            arr:[1,2,3,4,5]
+        },
+        //template: ``,
+        methods: {
+            change1:function(event){
+                console.log(event.target);
+                //this.$data.arr[0] = 100;
+                console.log(this.$data.arr);
+                this.$set(this.$data.arr, 0 , 100);
+            },
+            change2:function(event){
+                console.log(event.target);
+                this.$set(this.$data.arr, 0, 100);
+                //this.$data.arr[1] = 300;
+                this.$set(this.$data.arr, 1, 300);
+                //Vue.set(this.$data.arr, 1, 300);
+            },
+            change3:function(event){
+                console.log(event.target);
+                // 삭제 splice()-자동으로 재할당이 됨
+                this.$data.arr.splice(0,2);
+            },
+            change4:function(event){
+                console.log(event.target);
+                // splice react에서 사용 미리 연습
+                var arr_copy = [500, ...this.$data.arr , 70];  // ...this.$data.arr=3,4,5
+                console.log(arr_copy);
+                this.$data.arr = arr_copy;
+                // 프로퍼티는 문자열 이므로 arr은 문자열 처리 " OR '
+                // this.$set 사용시 두번째 key는 무조건 문자열 처리 한다
+                this.$set(this.$data, "arr", arr_copy);
+            },
+        },
+        components: {
+            /* 지역 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
+
+        },
+        computed: {
+
+        },
+        watch: {
+
+        },
+        mounted: function() {
+            console.log("mounted");
+        },
+        updated: function() {
+            console.log("updated");
+        },
+    });
+
+
+</script>
+<!-- vue 플러그인 임포트   -->

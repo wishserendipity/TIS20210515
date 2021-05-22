@@ -51,7 +51,7 @@
     <hr>
 
     <div id="app">
-        <input v-model:value="message">
+        <input v-model:value="message" ><!-- v-model 안 양방향 바인딩 -->
         <button v-on:click="reverseMsg">문자열 역순</button>
         <p> </p>
         <p>methods 속성을 이용한 수동 반영: <span>{{ methodscopy }}</span></p>
@@ -62,4 +62,59 @@
 
 </html>
 
+<!-- vue 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">/* vue 플러그인 임포트 */</script>
+<script>
+new Vue({
+    /* edtmc^2w */
+    el: "#app",
+    data: {
+        message : null,
+        methodscopy : null,
+        watchcopy : null,
+        //computedcopy : null,
+    },
+    //template: ``,
+    methods: {
+        /*putMsg : function(event){
+            //this.$data.message = event.target.value;
+            console.log(event.target.value + " |" +this.$data.message);
+        },*/
+        reverseMsg : function(params){
+            console.log("--------reverseMsg-----------");
+            this.$data.methodscopy = this.$data.message;
+            this.$set(this.$data, "methodscopy" , this.$data.message);
+            console.log("1" + this.$data.message);
+            console.log("2" + params.target.value);
+        }
+    },
+    components: {
+        /* 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
+
+    },
+    computed: {
+        /* 자동처리 + 동기식. 메서드로 작성. return 필수. */
+        computedcopy : function(){
+            return this.$data.message + " computed 에서 생성된값 ";
+        }
+
+    },
+    watch: {
+        /* 자동처리 + 비동기식. data 에 등록된 프로퍼티 모니터링. 메서드로 작성. 매개변수 입력 필수  */
+        message : function(value){
+            console.log(this.$data.message);
+            // this.$data.watchcopy = value;
+            this.$set(this.$data , "watchcopy" , value+ " watch 에서 생성된 값 ");
+        }
+    },
+
+    mounted: function() {
+        console.log("mounted");
+    },
+    updated: function() {
+        console.log("updated");
+    },
+});
+
+</script>
 <!-- vue 플러그인 임포트   -->
