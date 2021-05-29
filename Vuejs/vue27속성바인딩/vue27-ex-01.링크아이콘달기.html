@@ -85,27 +85,66 @@
         <h1>Adding Icons to Links</h1>
         <p>Here's a list of downloadable files:</p>
         <ul class="icon-links">
-            <li><a href="presentation.ppt">Presentation slides</a></li>
-            <li><a href="video.mp4">Video of presentation</a></li>
-            <li><a href="notes.pdf">Notes for presentation</a></li>
-            <li><a href="icons.gif">GIF Icon sprite</a></li>
-            <li><a href="icons.png">PNG Icon sprite</a></li>
-            <li><a href="icons.jpg">PNG Icon sprite</a></li>
-            <li><a href="fuyyu.ppt">Presentation slides</a></li>
-            <li><a href="fyyuy.mp4">Video of presentation</a></li>
-            <li><a href="uydyuflk.pdf">Notes for presentation</a></li>
-            <li><a href="OIP.gif">GIF Icon sprite</a></li>
-            <li><a href="ID7890IO.png">PNG Icon sprite</a></li>
-            <li><a href="PFDY.jpg">PNG Icon sprite</a></li>
+            <li><a v-on:click="typeclick" href="presentation.ppt" >Presentation slides</a></li>
+            <li><a v-on:click="typeclick" href="video.mp4">Video of presentation</a></li>
+            <li><a v-on:click="typeclick" href="notes.pdf">Notes for presentation</a></li>
+            <li><a v-on:click="typeclick" href="icons.gif">GIF Icon sprite</a></li>
+            <li><a v-on:click="typeclick" href="icons.png">PNG Icon sprite</a></li>
+            <li><a v-on:click="typeclick" href="icons.jpg">PNG Icon sprite</a></li>
+            <li><a v-on:click="typeclick" href="fuyyu.ppt">Presentation slides</a></li>
+            <li><a v-on:click="typeclick" href="fyyuy.mp4">Video of presentation</a></li>
+            <li><a v-on:click="typeclick" href="uydyuflk.pdf">Notes for presentation</a></li>
+            <li><a v-on:click="typeclick" href="OIP.gif">GIF Icon sprite</a></li>
+            <li><a v-on:click="typeclick" href="ID7890IO.png">PNG Icon sprite</a></li>
+            <li><a v-on:click="typeclick" href="PFDY.jpg">PNG Icon sprite</a></li>
         </ul>
     </div>
     <hr>
 
-    
+
 
 </body>
 
 </html>
 
 <!-- vue 플러그인 임포트   -->
+
+<!-- vue 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">/* vue 플러그인 임포트 */</script>
+<script>
+new Vue({
+    /* edtmc^2w */
+    el: "#app",
+    data: {
+
+    },
+    //template: ``,
+    methods: {
+
+        typeclick : function(evnet){
+            var href = event.target.href;
+            console.log(href);
+            event.stopPropagation(); // 버블링 막기
+            event.preventDefault(); // 리다이렉트 막기
+        }
+    },
+    components: {
+        /* 지역 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
+
+    },
+    computed: {
+
+    },
+    watch: {
+
+    },
+    mounted: function() {
+        console.log("mounted");
+    },
+    updated: function() {
+        console.log("updated");
+    },
+});
+
+</script>
 

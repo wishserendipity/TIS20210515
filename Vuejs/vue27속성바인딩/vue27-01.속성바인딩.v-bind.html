@@ -42,32 +42,101 @@
 
     <h2>v-bind 연습 1</h2>
     <div id="app1">
+        클릭하면 ID 속성 값으로 1234가 설정되게 만드시오.
         <p v-bind:id="idA">
             <button v-on:click="clickBindId">클릭</button>
             아이디 바인딩
         </p>
+        클릭하면 클래스 속성 값으로 container 설정되게 만드시오.
         <p v-bind:class="classA">
             <button v-on:click="clickBindClass">클릭</button>
             클래스 바인딩
         </p>
+        클릭하면 클래스 속성 값으로 color:blue, font-size:20pt; 설정되게 만드시오.
         <p v-bind:style="styleA">
             <button v-on:click="clickBindStyle">클릭</button>
             스타일 바인딩
         </p>
+        클릭하면 클래스 속성 값으로 v-bind 디렉티브가 나오게  만드시오.
         <p>
             <button v-on:click="clickBindValue">클릭</button>
             <input id="a" type="text" v-bind:value="message">
         </p>
+        클릭하면 클래스 속성 값으로 images/heart.png 나오게  만드시오.
         <p>
             <button v-on:click="clickBindSrc">클릭</button>
             <img v-bind:src="imagePath" />
         </p>
     </div>
     <hr>
-    
+
 
 </body>
 
 </html>
 
 <!-- vue 플러그인 임포트   -->
+
+<!-- vue 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">/* vue 플러그인 임포트 */</script>
+<script>
+new Vue({
+    /* edtmc^2w */
+    el: "#app1",
+    data: {
+        idA : null,
+        classA : null,
+        styleA : null,
+        message : null,
+        imagePath : null,
+    },
+    //template: ``,
+    methods: {
+        clickBindId : function(event){
+            console.log(event.target);
+            console.log(this.$data.idA);
+            //this.$data.idA= "1234";
+            this.$set(this.$data, "idA", "1234");
+
+        },
+        clickBindClass : function(event){
+            console.log(event.target);
+            this.$set(this.$data, "classA", "container");
+        },
+        clickBindStyle : function(event){
+            console.log(event.target);
+            var obj = {
+                color : "blue",
+                fontSize : "20pt",
+            }
+            this.$set(this.$data, "styleA", obj);
+        },
+        clickBindValue : function(event){
+            console.log(event.target);
+            this.$set(this.$data, "message", "v-bind 디렉티브");
+        },
+        clickBindSrc : function(event){
+            console.log(event.target);
+            this.$set(this.$data, "imagePath", "../images/heart.png");
+        },
+
+    },
+    components: {
+        /* 지역 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
+
+    },
+    computed: {
+
+    },
+    watch: {
+
+    },
+    mounted: function() {
+        console.log("mounted");
+    },
+    updated: function() {
+        console.log("updated");
+    },
+});
+
+</script>
