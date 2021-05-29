@@ -96,3 +96,81 @@
 </html>
 
 <!-- vue 플러그인 임포트   -->
+
+<!-- vue 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">/* vue 플러그인 임포트 */</script>
+<script>
+var componentChild = {
+    /* pdtmc^2w */
+    props: [ "num" ] ,
+    data: function() {
+        return {
+
+        }
+    },
+    template: `
+    <div class="component-child">
+              Child counter : {{ num }} <br>
+              <button name="child" v-on:click="addCounter">+</button>
+              <button name="child" v-on:click="subCounter">-</button>
+          </div>
+    `,
+    methods: {
+      addCounter : function(event){
+        console.log("===" +event.target);
+        console.log("===" + this.$data.num); // 106라인의 data.num 이므로 값이 없음. 부모의 값을 찾아야함
+        //debugger;
+        // 부모 메서드를 호출
+        this.$emit('add-counter',  event, +10);
+      },
+      subCounter : function(event){
+        console.log(event);
+        this.$emit('sub-counter',  event, -10);
+      }
+    },
+    components: {
+        /* 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
+
+    },
+
+};
+
+new Vue({
+    /* edtmc^2w */
+    el: "#app",
+    data: {
+      counter : 0,
+    },
+    //template: ``,
+    methods: {
+      addCounter : function(param_evt, param_val){
+        console.log("**" +param_evt, param_val);
+        console.log(this.$data.counter);
+        //debugger;
+
+        this.$set(this.$data, "counter" , this.$data.counter+param_val);
+      },
+      subCounter : function(param_evt, param_val){
+        console.log(param_evt, param_val);
+        this.$set(this.$data, "counter" , this.$data.counter+param_val);
+      }
+    },
+    components: {
+        /* 지역 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
+        "component-child" : componentChild,
+    },
+    computed: {
+
+    },
+    watch: {
+
+    },
+    mounted: function() {
+        console.log("mounted");
+    },
+    updated: function() {
+        console.log("updated");
+    },
+});
+
+</script>
