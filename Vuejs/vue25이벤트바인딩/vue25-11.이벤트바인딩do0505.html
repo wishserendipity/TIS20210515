@@ -43,13 +43,13 @@
     <div id="app">
         <h3>예제1. 1씩 증가하는 click 이벤트 핸들러 작성(각자) </h3>
         <div>1씩 증가: {{sum1}}</div>
-        <button click="clickBtn1">1씩 증가</button>
+        <button v-on:click="clickBtn1">1씩 증가</button>
         <hr />
 
         <h3>예제2. input 태그에 입력된 값만큼 증가하는 이벤트 핸들러 작성(각자) </h3>
         <div>{{numInput}}씩 증가: {{sumInput}}</div>
         <input type="number" name="number" v-model:value="numInput">
-        <button click="clickBtnInput">{{numInput}} 씩 증가</button>
+        <button v-on:click="clickBtnInput">{{numInput}} 씩 증가</button>
         <hr />
 
         <h3>예제3. data-num 속성에 설정된 값만큼 증가하는 이벤트 핸들러 작성(같이) </h3>
@@ -58,7 +58,7 @@
             event.target.dataset 을 사용하여 접근.
         </p>
         <div>10 씩 증가: {{sum10}}</div>
-        <button click="clickBtn10" data-num="10">10 씩 증가</button>
+        <button v-on:click="clickBtn10" data-num="10">10 씩 증가</button>
         <hr />
 
         <h3>도전1. data-num 속성에 지시자 작성을 적용하여 본다.  </h3>
@@ -67,14 +67,77 @@
             numInput 에 입력된 값이 없으면 15을 사용하여 더하도록 작성하시오<br>
         </p>
         <div>15 씩 증가: {{sum10}}</div>
-        <button click="clickBtnComputedNumInput" data-num="15">15  씩 증가</button>
+        <button v-on:click="clickBtnComputedNumInput" data-num="15">15  씩 증가</button>
         <hr />
     </div>
 
-    
+
 
 </body>
 
 </html>
 
 <!-- vue 플러그인 임포트   -->
+
+<!-- vue 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">/* vue 플러그인 임포트 */</script>
+<script src="https://unpkg.com/vuex@3.3.0/dist/vuex.js"> /* vuex 플러그인 임포트 */</script>
+<script src="https://unpkg.com/vue-router@3.1.6/dist/vue-router.js"> /* vue 라우터 플러그인 임포트 */</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"> /* axios 플러그인 임포트 */</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> /* jQuery 플러그인 임포트 */</script>
+<script>
+new Vue({
+    /* edtmc^2w */
+    el: "#app",
+    data: {
+        sum1 : 0,
+        numInput : null,
+        sumInput : 1,
+        sum10 :0,
+    },
+    //template: ``,
+    methods: {
+        clickBtn1 : function(event){
+            console.log(this.$data.sum1);
+            //this.$data.sum1 = this.$data.sum1+1;
+            this.$set(this.$data, "sum1", this.$data.sum1+1);
+            console.log(this.$data.sum1);
+
+        },
+
+        clickBtnInput : function(event){
+            console.log(this.$data.numInput + " | " + this.$data.sumInput);
+            //this.$data.sum1 = this.$data.sum1+1;
+           this.$set(this.$data, "numInput", this.$data.numInput);
+           this.$set(this.$data, "sumInput", (this.$data.sumInput)+(this.$data.numInput));
+           // console.log(this.$data.sum1);
+
+        },
+
+        clickBtn10 : function(event){
+
+        }
+
+
+    },
+    components: {
+        /* 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
+
+    },
+    computed: {
+        /* 자동처리 + 동기식. 메서드로 작성. return 필수. */
+
+    },
+    watch: {
+        /* 자동처리 + 비동기식. data 에 등록된 프로퍼티 모니터링. 메서드로 작성. 매개변수 입력 필수  */
+
+    },
+    mounted: function() {
+        console.log("mounted");
+    },
+    updated: function() {
+        console.log("updated");
+    },
+});
+
+</script>
