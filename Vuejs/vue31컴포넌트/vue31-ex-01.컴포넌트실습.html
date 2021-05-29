@@ -78,35 +78,171 @@
 
     <div id="app">
         <!-- component-header -->
-        <header>
-            Header
-        </header>
-        
+        <component-header v-bind:headerhtml="headerarea"></component-header>
+
         <!-- component-content -->
-        <div id="content">
-            <p>Content</p>
-            
-            <!-- component-aside -->
-            <aside>
-                Aside
-            </aside>
-            
-            <!-- component-content-list -->
-            <div id="content-list">
-                List
-            </div>
-        </div>
-        
+        <component-content v-bind:contenthtml="contentarea"></component-content>
+
         <!-- component-footer -->
-        <footer>
-            Footer
-        </footer>
+        <component-footer v-bind:footerhtml="footerarea"></component-footer>
+
     </div>
 
-    
+
 
 </body>
 
 </html>
 
+
 <!-- vue 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">/* vue 플러그인 임포트 */</script>
+<script>
+var componentHeader = {
+    /* pdtmc^2w */
+    props: [
+        "headerhtml"
+    ] ,
+    data: function() {
+           return {
+        }
+    },
+    template: `
+    <header>
+            Header
+        </header>
+    `,
+    methods: {
+
+    },
+    components: {
+        /* 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
+
+    },
+
+};
+
+var contentAside = {
+    /* pdtmc^2w */
+    /*props: [
+        "asidehtml"
+    ] ,*/
+    template: `
+        <aside>
+            Aside
+        </aside>
+    `,
+
+};
+
+var contentList  = {
+    /* pdtmc^2w */
+    /*props: [
+        "listhtml"
+    ] ,*/
+    data: function() {
+        return {
+
+        }
+    },
+    template: `
+        <div id="content-list">
+                List
+        </div>
+    `,
+};
+
+var componentContent = {
+    /* pdtmc^2w */
+    /*props: [
+        "contenthtml"
+    ] ,*/
+    data: function() {
+        return {
+            asidehtml: null,
+            listarea : null
+        }
+    },
+    template: `
+        <div id="content">
+            <p>Content</p>
+
+            <!-- component-aside -->
+            <content-aside v-bind:asidehtml="asidehtml"></content-aside>
+
+            <!-- component-content-list -->
+            <content-list v-bind:listhtml="listarea"></content-list>
+        </div>
+    `,
+    methods: {
+
+    },
+    components: {
+        /* 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
+        "content-aside" : contentAside,
+        "content-list" : contentList,
+    },
+
+};
+
+
+var componentFooter = {
+    /* pdtmc^2w */
+    props: [
+        "footerhtml"
+    ] ,
+    data: function() {
+        return {
+
+        }
+    },
+    template: `
+    <footer>
+            Footer
+        </footer>
+    `,
+    methods: {
+
+    },
+    components: {
+        /* 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
+
+    },
+
+};
+
+new Vue({
+    /* edtmc^2w */
+    el: "#app",
+    data: {
+        headerarea : null,
+        contentarea : null,
+        footerarea : null,
+    },
+    //template: ``,
+    methods: {
+
+    },
+    components: {
+
+        /* 지역 컴포넌트 등록. 예시) "태그명" : 컴포넌트명 */
+        "component-header" : componentHeader,
+        "component-content" : componentContent,
+        "component-footer" : componentFooter,
+    },
+    computed: {
+
+    },
+    watch: {
+
+    },
+    mounted: function() {
+        console.log("mounted");
+    },
+    updated: function() {
+        console.log("updated");
+    },
+});
+
+
+</script>
