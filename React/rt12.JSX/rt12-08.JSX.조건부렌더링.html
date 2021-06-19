@@ -40,3 +40,61 @@
 
 </html>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js">
+    /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js">
+    /* import React, { Component, PureComponent } from "react" */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js">
+    /* import ReactDOM from "react-dom" */
+</script>
+
+<script type="text/babel">
+console.log(React);
+
+class userGreeting extends React.Component {
+    render() { // JSX로 화면 만들기
+        return (
+            <h1>welcome</h1>
+        )
+    }
+};
+
+class GuestGreeting extends React.Component {
+    render() { // JSX로 화면 만들기
+        return (
+            <h1>Please Sign up</h1>
+        )
+    }
+};
+
+class Greeting extends React.Component {
+
+    render() { // JSX로 화면 만들기
+        const {isLoggedIn} = this.props;
+
+        if(isLoggedIn ){
+            return (
+            <div>
+                <userGreeting/>
+            </div>
+            )
+        }else{
+            return (
+                <GuestGreeting/>
+            )
+        }
+
+
+
+    }
+};
+//export default rt12-08.JSX.조건부렌더링;
+
+ReactDOM.render(
+<Greeting isLoggedIn={false} />
+, document.getElementById("app")
+)
+</script>
+

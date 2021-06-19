@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>조건부 렌더링</title>
+
+    <link rel="stylesheet" href="../css/reset.css"/>
+</head>
+
+<body>
+    <xmp>
+        JSX 안세어 조건부 렌더링 방법을 학습한다.
+
+        아래 사이트의 코드를 이용하여 클래스 컴포넌트를 만들어 본다.
+        참고: https://reactjs.org/docs/conditional-rendering.html
+
+        function Mailbox(props) {
+            const unreadMessages = props.unreadMessages;
+            return (
+              <div>
+                <h1>Hello!</h1>
+                {unreadMessages.length > 0 &&
+                  <h2>
+                    You have {unreadMessages.length} unread messages.
+                  </h2>
+                }
+              </div>
+            );
+          }
+
+          const messages = ['React', 'Re: React', 'Re:Re: React'];
+          ReactDOM.render(
+            <Mailbox unreadMessages={messages} />,
+            document.getElementById('root')
+          );
+
+    </xmp>
+    <hr>
+
+    <div id="app"></div>
+</body>
+
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js">
+    /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js">
+    /* import React, { Component, PureComponent } from "react" */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js">
+    /* import ReactDOM from "react-dom" */
+</script>
+
+<script type="text/babel">
+
+//import React, {Component, PureComponent, Fragment} from "react";
+//import Redux from "redux";
+//import ReactRedux, {Provider} from "react-redux";
+//import {BrowserRouter,Switch,Router,Route,IndexRoute,Link,IndexLink,NavLink} from "react-router-dom";
+//import ReactDOM from "react-dom";
+
+console.log(React);
+
+class Mailbox extends React.Component {
+
+    render() { // JSX로 화면 만들기
+        const {unreadMessages} = this.props;
+        return (
+            <div>
+                <h1>Hello!</h1>
+                { /*this.props.unreadMessages.length > 0 인경우에만 나에게 하시요 */}
+                {/* 조건부 연산자릴 사용 하는 경우 */}
+                { /*unreadMessages.length > 0 ?
+                  (
+                  <h2>
+                    You have {unreadMessages.length} unread messages.
+                  </h2>
+                  )
+                  :
+                  ''
+                */}
+
+                  {/* and 연산자를 사용하는 경우- 코드 가독성이 좋다  */}
+                  { unreadMessages.length!=null && unreadMessages.length > 0 &&
+                  (
+                  <h2>
+                    You have {unreadMessages.length} unread messages.
+                  </h2>
+                  )
+                  }
+              </div>
+        )
+    }
+};
+//export default rt12-08.JSX.조건부렌더링_UI;
+console.log(React);
+//const messages = [];
+//const messages = ['React', 'Re: React', 'Re:Re: React'];
+const messages = "React', 'Re: React', 'Re:Re: React";
+ReactDOM.render(
+<Mailbox unreadMessages={messages} />,
+document.getElementById('app')
+);
+</script>
+
