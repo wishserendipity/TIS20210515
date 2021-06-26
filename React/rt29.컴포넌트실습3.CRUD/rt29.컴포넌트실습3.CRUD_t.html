@@ -163,7 +163,7 @@
                     </td>
                     <td>
                         <input
-                            type="number"
+                            type="text"
                             name="power"
                             ref={this.refUserPower }
                             defaultValue={item.power}
@@ -187,7 +187,7 @@
             </div>
             <div>
                 <label for="">Power : </label>
-                <input type="number" name="power" placeholder="파워를 입력하세요"  />
+                <input type="text" name="power" placeholder="파워를 입력하세요"  />
             </div>
             <button>Add</button>
         </div>
@@ -253,6 +253,7 @@
 </body>
 </html>
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js">
     /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
 </script>
@@ -307,67 +308,30 @@
             // 이벤트 핸들러는 화살표 함수로 만들면 this bind()를 생략해도 된다
             console.log(event.target)
 
-            // 유효성 검사: 생략
-            if(this.refUserName.current.value.trim() === ''){
-                alert('이름을 입력하세요')
-                this.refUserName.current.focus()
-                event.preventDefault()
-                return false
+            // 부모에 입력값을 전달 ===> 부모 컴포넌트 콜백 메서드 호출.
+            const item = {
+                name: this.refUserName.current.value ,
+                power: this.refUserPower.current.value,
             }
-            if(this.refUserName.current.value.trim() === ''){
-                alert('파워를 입력하세요')
-                this.refUserPower.current.focus()
-                event.preventDefault()
-                return false
-            }
-            if( isNaN( Number(this.refUserPower.current.value) ) ){
-                alert('파워에 숫자를 입력하세요')
-                this.refUserPower.current.value=""
-                this.refUserPower.current.focus()
-                event.preventDefault()
-                return false
-            }
+            this.props.doIns(item); // CrudApp.doIns( item ) 호출
 
-            // ref 를 사용하여 현재 입력된 값을 가져온다.
-            //const name = this.refUserName.current.value
-            //const power = Number(this.refUserPower.current.value)
-            const newitem = {
-                id: null,
-                name: this.refUserName.current.value,
-                power: Number(this.refUserPower.current.value),
-            }
-
-            // 부모(CrudApp)에게 값을 넘긴다.
-            // CrudApp.func.doIns() 호출
-            this.props.doIns( newitem );
-
-            // input 태그 입력값 초기화
+            // 입력값 초기화
             this.refUserName.current.value = "";
             this.refUserPower.current.value = 0;
         }
         render() { // JSX로 화면 만들기
             return (
-                <div>
-                    <div>
-                        <label htmlFor="">Name : </label>
-                        <input type="text"
-                            name="name"
-                            placeholder="이름을 입력하세요"
-                            ref={this.refUserName}
-                            defaultValue={""}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="">Power : </label>
-                        <input type="number"
-                            name="power"
-                            placeholder="숫자를 입력하세요"
-                            ref={this.refUserPower}
-                            defaultValue={0}
-                        />
-                    </div>
-                    <button onClick={this.doIns}>Add</button>
-                </div>
+        <div>
+            <div>
+                <label htmlFor="">Name : </label>
+                <input type="text" name="name" placeholder="이름을 입력하세요"  ref={this.refUserName} defaultValue={""} />
+            </div>
+            <div>
+                <label htmlFor="">Power : </label>
+                <input type="text" name="power" placeholder="파워를 입력하세요"  ref={this.refUserPower} defaultValue={0}  />
+            </div>
+            <button onClick={this.doIns}>Add</button>
+        </div>
             )
         }
     };
@@ -416,8 +380,8 @@
         }
         render() { // JSX로 화면 만들기
 
-            // const items = this.props.items;  // CrudApp.state.items
-            const {items} = this.props;  // CrudApp.state.items
+            // const items = this.props.items;
+            const {items} = this.props;
 
             const arrs = items.map( (item, index, array)=>{
                 return (
@@ -429,19 +393,19 @@
             });
 
             return (
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>NAME</th>
-                            <th>POWER</th>
-                            <th>CRUD</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {arrs}
-                    </tbody>
-                </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>POWER</th>
+                    <th>CRUD</th>
+                </tr>
+            </thead>
+            <tbody>
+                {arrs}
+            </tbody>
+        </table>
             )
         }
     };
@@ -452,7 +416,7 @@
         static propsTypes = {  /* props의 프로퍼티 타입 설정 */ }
         state = {
             // 상태값(변수)을 정의한다.
-            isEditMode: false,
+            isEditMode: false
         }
         style = {
             // 컴포넌트 내부에서 사용할 인라인 스타일을 정의한다.
@@ -471,8 +435,8 @@
             // func 에 정의한 메서드는 반드시 this bind 처리해야 한다.
 
             // ref 만들기. 예시) this.inputref = React.createRef()
-            this.refUserName = React.createRef();
-            this.refUserPower = React.createRef();
+            this.refUserName = React.createRef()
+            this.refUserPower = React.createRef()
         }
         componentDidMount() {
             // 마운트 완료 후에 실행됨 : 페이지 load 될 때 한번
@@ -488,7 +452,7 @@
         doDel = (event)=>{
             // 부모 콜백 메세드 호출. CrudApp.doDel() 호출
             const {index, item} = this.props;
-            this.props.doDel(index, item); // === CrudApp.func.doDel(index, item)
+            this.props.doDel( index, item);
         }
         doUp = (event)=>{
             // 부모 콜백 메세드 호출. CrudApp.doUp() 호출
@@ -497,11 +461,11 @@
         }
         doDown = (event)=>{
             // 부모 콜백 메세드 호출. CrudApp.doUp() 호출
+            debugger;
             const {index, item} = this.props;
-            this.props.doDown( index, item);
+            this.props.doUp( index, item);
         }
         doEdit = (event)=>{
-            // formEdit 가 보이게 설정
             // this.state.isEditMode = true;
             this.setState({
                 ...this.state,
@@ -509,12 +473,6 @@
             })
         }
         doSave = (event)=>{
-
-            // 유효성 검사.
-            // name 입력 여부,
-            // power 입력 여부, 숫자 입력 여부,
-
-            // formView 가 보이게 설정
             ///this.state.isEditMode = false;
             this.setState({
                 ...this.state,
@@ -522,9 +480,8 @@
             })
 
             // 부모 콜백 메세드 호출. CrudApp.doSave() 호출
-            const {item, index} = this.props;
             const newitem = {
-                id: item.id,
+                id: this.props.item.id,
                 name: this.refUserName.current.value,
                 power: Number(this.refUserPower.current.value) ,
             }
@@ -534,7 +491,6 @@
             // const item = this.props.item;
             const {item} = this.props;
 
-            // power가 300이상인 사람은 글자색을 red로 bold스타일로 출력
             const strong = item.power >= 300 ? "strong" : "";
 
             const formView = (
@@ -551,8 +507,7 @@
                 </tr>
             );
 
-            // 화면 수정
-            const formEdit = (
+            const formEdit =  (
                 <tr className={strong}>
                     <td>{item.id}</td>
                     <td>
@@ -563,7 +518,7 @@
                                defaultValue={item.name} />
                     </td>
                     <td>
-                        <input type="number"
+                        <input type="text"
                                name="power"
                                placeholder="이름을 입력하세요"
                                ref={this.refUserPower}
@@ -658,15 +613,15 @@
                     items: newitems,
                 })
             },
-            doSave(newitem){
+            doDown(index, item){
+                // 50씩 감소. item.power = item.power - 50;
+
                 // 새로운 배열 만들기
                 const newitems = this.state.items.map( (element,index)=>{
-                    if( element.id === newitem.id ) {
-                        return newitem;
+                    if( element.id === item.id ) {
+                        element.power = element.power - 50;
                     }
-                    else {
-                        return element;
-                    }
+                    return element;
                 });
 
                 this.setState({
@@ -674,16 +629,30 @@
                     items: newitems,
                 })
             },
+            doSave(newitem){
+                // 새로운 것으로 대체
+                const newitems = this.state.items.map( (element, index)=>{
+                    if(element.id === newitems.id ){
+                        return newitems;
+                    }else{
+                        return element;
+                    }
+                })
+                this.setState({
+                    ...this.state,
+                    items : newitems,
+                })
+            },
         }
         constructor(props) {
             super()
             // this 바인딩. 예시) this.func.handler = this.func.handler.bind(this);
             // func 에 정의한 메서드는 반드시 this bind 처리해야 한다.
-            this.func.doIns  = this.func.doIns.bind(this);
-            this.func.doDel  = this.func.doDel.bind(this);
-            this.func.doUp   = this.func.doUp.bind(this);
-            this.func.doDown = this.func.doDown.bind(this);
-            this.func.doSave = this.func.doSave.bind(this);
+            this.func.doIns    = this.func.doIns.bind(this);
+            this.func.doDel    = this.func.doDel.bind(this);
+            this.func.doUp     = this.func.doUp.bind(this);
+            this.func.doDown   = this.func.doDown.bind(this);
+            this.func.doSave   = this.func.doSave.bind(this);
 
             // ref 만들기. 예시) this.inputref = React.createRef()
 
@@ -705,16 +674,16 @@
         }
         render() { // JSX로 화면 만들기
             return (
-                <div id="app">
-                    <h1>Creat Read Update Delete</h1>
-                    <CrudInput {...this.props} {...this.state} {...this.func} {...this.style}></CrudInput>
-                    <hr/>
+    <div id="app">
+        <h1>Creat Read Update Delete</h1>
+        <CrudInput {...this.props} {...this.state} {...this.func} {...this.style} />
+        <hr/>
 
-                    <CrudList {...this.props} {...this.state} {...this.func} {...this.style}></CrudList>
-                </div>
+        <CrudList {...this.props} {...this.state} {...this.func} {...this.style} />
+    </div>
             )
         }
-    }
+    };
 
-    ReactDOM.render(<CrudApp></CrudApp>, document.getElementById("app"))
+    ReactDOM.render( <CrudApp />, document.getElementById("app") );
 </script>
