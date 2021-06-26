@@ -609,7 +609,29 @@
             // func에는 자식 컴포넌트에 넘길 메서드만 작성한다.
             // 왜 자식에게 부모 메서드를 넘기나? 부모의 상태값을 변경하기 위해서.
             doIns(newitem){
-                // ...생략
+                // this.state.items에 max(id)를 찾는 방법
+                //this.state.items.reduce() 사용해서
+                if( this.state.items.length>0 ){
+                    // 추가
+                    // 가장 끝의 id 값을 찾는것
+                    const maxitem = this.state.items.reduce( (prev, curt) =>{
+                        if(prev.id>curt.id)
+                            return prev;
+                        else
+                            return curt;
+                    });
+                    newitem.id = maxitem.id+1;
+                }else{
+                    //배열 생성
+                    newitem.id = 1;
+                }
+
+                //this.state.items = this.state.items.push(newitem);
+                const newitems = [...this.state.items, newitem];
+                this.setState({
+                    ...this.state,
+                    items : newitems,
+                })
             },
             doDel(index, item){
                 const r = window.confirm("정말로 삭제하시겠습니까?");
